@@ -28,7 +28,7 @@ let package: Package = .init(
 		),
 		.testTarget(
 			name: "RationalsTests",
-			dependencies: ["Measures"],
+			dependencies: ["Rationals"],
 			path: "Tests",
 			resources: [
 				.process("RationalsTests/Resources")
