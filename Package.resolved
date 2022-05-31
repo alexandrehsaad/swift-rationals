@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "swift-docc-plugin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-docc-plugin.git",
+      "state" : {
+        "revision" : "3303b164430d9a7055ba484c8ead67a52f7b74f6",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "swift-numeric-protocols",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/alexandrehsaad/swift-numeric-protocols.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "62680e3d205cce79605824f2b6eb3844228147ec"
+      }
+    }
+  ],
+  "version" : 2
+}
