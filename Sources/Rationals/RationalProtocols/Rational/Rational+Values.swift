@@ -1,11 +1,11 @@
-// Fractionable+Values.swift
+// Rational+Values.swift
 // Rationals
 //
 // Copyright © 2021-2022 Alexandre H. Saad
 // Licensed under Apache License v2.0 with Runtime Library Exception
 //
 
-extension Fractionable {
+extension Rational {
 	
 	// MARK: - Creating Instances
 	
@@ -13,7 +13,7 @@ extension Fractionable {
 	///
 	/// - parameter unit: The unit of fraction.
 	internal init(unit: UInt) {
-		self.init(1, on: unit)
+		self.init(1, on: .init(unit))
 	}
 	
 	// MARK: - Inspecting Values

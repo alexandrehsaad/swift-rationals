@@ -54,13 +54,13 @@ extension Simplifiable {
 }
 
 extension Simplifiable
-where Self: Fractionable {
+where Self: Rational {
 	
 	// MARK: - Inspecting Values
 	
 	/// A boolean value indicating whether this fraction is simplifiable.
 	public var isSimplifiable: Bool {
-		let divisor: Int = gcd(self.numerator, self.denominator)
+		let divisor: Term = gcd(self.numerator, self.denominator)
 		return divisor > 1
 	}
 	
@@ -76,15 +76,27 @@ where Self: Fractionable {
 	///
 	/// - returns: The simplified fraction.
 	public func simplified() -> Self {
-		let divisor: Int = gcd(self.numerator, self.denominator)
+		let divisor: Term = gcd(self.numerator, self.denominator)
 		
 		guard divisor > 1 else {
 			return self
 		}
 		
-		let newNumerator: Int = self.numerator / divisor
-		let newDenominator: Int = self.denominator / divisor
+		let newNumerator: Term = self.numerator / divisor
+		let newDenominator: Term = self.denominator / divisor
 		
 		return .init(newNumerator, on: newDenominator)
+	}
+	
+	/// A function to reduce this fraction to its lowest terms.
+	///
+	/// ```swift
+	/// var fraction: Fraction = .init(2, on: 4)
+	/// fraction.simplify()
+	/// print(fraction)
+	/// // Prints "1/2"
+	/// ```
+	public mutating func simplify() {
+		self = self.simplified()
 	}
 }

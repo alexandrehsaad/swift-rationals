@@ -1,4 +1,4 @@
-// FractionableTests.swift
+// RationalTests.swift
 // RationalsTests
 //
 // Copyright © 2021-2022 Alexandre H. Saad
@@ -8,9 +8,9 @@
 import XCTest
 @testable import Rationals
 
-protocol FractionableTests: XCTestCase {
+protocol RationalTests: XCTestCase {
 	associatedtype TestSubject
-	where TestSubject: Fractionable
+	where TestSubject: Rational
 	
 	func test_quotientSucceeds()
 	func test_isUnitReturnsFalse()
@@ -21,13 +21,11 @@ protocol FractionableTests: XCTestCase {
 	func test_isImproperReturnsTrue()
 	func test_isWholeReturnsFalse()
 	func test_isWholeReturnsTrue()
-	func test_isDyadicReturnsFalse()
-	func test_isDyadicReturnsTrue()
 	func test_isLikeReturnsFalse()
 	func test_isLikeReturnsTrue()
 }
 
-extension FractionableTests {
+extension RationalTests {
 	func isUnitReturnsFalse() {
 		// Given
 		let fraction: TestSubject = .init(2, on: 2)
@@ -92,22 +90,6 @@ extension FractionableTests {
 		XCTAssertTrue(fraction.isImproper)
 	}
 	
-	func isDyadicReturnsFalse() {
-		// Given
-		let fraction: TestSubject = .init(1, on: 3)
-		
-		// Then
-		XCTAssertFalse(fraction.isDyadic)
-	}
-	
-	func isDyadicReturnsTrue() {
-		// Given
-		let fraction: TestSubject = .init(1, on: 2)
-		
-		// Then
-		XCTAssertTrue(fraction.isDyadic)
-	}
-	
 	func isLikeReturnsFalse() {
 		// Given
 		let lhs: TestSubject = .init(2, on: 2)
@@ -133,7 +115,7 @@ extension FractionableTests {
 	}
 }
 
-extension FractionableTests {
+extension RationalTests {
 	func isNormalizedReturnsFalse()
 	where TestSubject: Negateable {
 		// Given

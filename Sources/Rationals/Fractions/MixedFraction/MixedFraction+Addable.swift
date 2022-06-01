@@ -12,9 +12,9 @@ extension MixedFraction: Addable {
 	/// - parameter rhs: The addend.
 	/// - returns: The sum.
 	public static func + (_ lhs: Self, _ rhs: Self) -> Self {
-		let newIntegral: Int = lhs.integral + rhs.integral
-		let newNumerator: Int
-		let newDenominator: Int
+		let newIntegral: Term = lhs.integral + rhs.integral
+		let newNumerator: Term
+		let newDenominator: Term
 		
 		if lhs.fractional.isLike(rhs.fractional) {
 			newNumerator = lhs.numerator + rhs.numerator

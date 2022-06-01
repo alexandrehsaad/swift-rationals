@@ -14,5 +14,7 @@ extension MixedFraction: RepresentableByZero {
 	}
 	
 	/// The representation of zero.
-	public static let zero: Self = .init(0, and: .zero)
+	public static var zero: Self {
+		return .init(0, and: .zero)
+	}
 }

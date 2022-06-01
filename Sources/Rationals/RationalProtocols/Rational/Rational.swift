@@ -1,4 +1,4 @@
-// Fractionable.swift
+// Rational.swift
 // Rationals
 //
 // Copyright © 2021-2022 Alexandre H. Saad
@@ -6,7 +6,10 @@
 //
 
 /// Representing values that can be fractioned.
-public protocol Fractionable {
+public protocol Rational {
+	///
+	associatedtype Term
+	where Term: FixedWidthInteger & Operatable & Negateable & Raisable
 	
 	// MARK: - Creating Instances
 	
@@ -14,22 +17,21 @@ public protocol Fractionable {
 	///
 	/// - parameter numerator: The numerator.
 	/// - parameter denominator: The denominator.
-	init<Value>(_ numerator: Value, on denominator: Value)
-	where Value: BinaryInteger
+	init(_ numerator: Term, on denominator: Term)
 	
 	// MARK: - Instance Properties
 	
 	/// The numerator of this instance.
-	var numerator: Int { get }
+	var numerator: Term { get }
 	
 	/// The denominator of this instance.
-	var denominator: Int { get }
+	var denominator: Term { get }
 	
 	/// The quotient of this instance.
 	var quotient: Double { get }
 }
 
-extension Fractionable {
+extension Rational {
 	
 	// MARK: - Inspecting Values
 	
@@ -75,19 +77,6 @@ extension Fractionable {
 			&& self.numerator > 0
 	}
 	
-	/// A boolean value indicating whether this fraction is dyadic.
-	///
-	/// A dyadic fraction is a fraction in which the denominator is a power of 2.
-	///
-	/// ```swift
-	/// let value: Fraction = .init(1, on: 2)
-	/// print(value.isDyadic)
-	/// // Prints "true"
-	/// ```
-	public var isDyadic: Bool {
-		return self.denominator.isPower(of: 2)
-	}
-	
 	/// Returns a boolean value indicating whether the two specified fractions are like fractions.
 	///
 	/// Two like fractions have the same denominator.
@@ -101,12 +90,12 @@ extension Fractionable {
 	///
 	/// - parameter rhs: A fraction to compare.
 	/// - returns: `true` if is like, and `false` otherwise.
-	public func isLike(_ rhs: Self) -> Bool {
+	internal func isLike(_ rhs: Self) -> Bool {
 		return self.denominator == rhs.denominator
 	}
 }
 
-extension Fractionable
+extension Rational
 where Self: Negateable {
 	
 	// MARK: - Inspecting Values
@@ -142,8 +131,8 @@ where Self: Negateable {
 			return self
 		}
 		
-		let newNumerator: Int = -self.numerator
-		let newDenominator: Int = -self.denominator
+		let newNumerator: Term = -self.numerator
+		let newDenominator: Term = -self.denominator
 		return .init(newNumerator, on: newDenominator)
 	}
 	
@@ -162,7 +151,7 @@ where Self: Negateable {
 	}
 }
 
-extension Fractionable
+extension Rational
 where Self: RepresentableByNaN {
 	public var isNaN: Bool {
 		return self.numerator == 0
@@ -174,7 +163,7 @@ where Self: RepresentableByNaN {
 	}
 }
 
-extension Fractionable
+extension Rational
 where Self: RepresentableByZero {
 	public var isFinite: Bool {
 		return self.denominator != 0

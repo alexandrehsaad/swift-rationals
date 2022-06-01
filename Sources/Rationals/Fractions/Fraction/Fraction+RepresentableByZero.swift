@@ -13,5 +13,7 @@ extension Fraction: RepresentableByZero {
 	}
 	
 	/// The representation of zero.
-	public static let zero: Self = .init(0, on: 1)
+	public static var zero: Self {
+		return .init(0, on: 1)
+	}
 }

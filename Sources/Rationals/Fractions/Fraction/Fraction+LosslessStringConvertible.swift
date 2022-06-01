@@ -19,15 +19,16 @@ extension Fraction: LosslessStringConvertible {
             self.init(floatLiteral: value)
         } else {
             
-            let substrings: Array<Substring> = description.split(separator: "/", maxSplits: 2, omittingEmptySubsequences: false)
+            let substrings: Array<Substring> = description
+				.split(separator: "/", maxSplits: 2, omittingEmptySubsequences: false)
             
             guard substrings.count == 2,
-                  let newNumerator: Int = .init(substrings[0]),
-                  let newDenominator: Int = .init(substrings[1]) else {
+		    let newNumerator: Int = .init(substrings[0]),
+		    let newDenominator: Int = .init(substrings[1]) else {
                 return nil
             }
             
-            self.init(newNumerator, on: newDenominator)
+			self.init(.init(newNumerator), on: .init(newDenominator))
         }
     }
 }

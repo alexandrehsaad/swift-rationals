@@ -6,7 +6,8 @@
 //
 
 /// A representation of a mixed fraction, or the sum of two fractions without loss of precision.
-public struct MixedFraction {
+public struct MixedFraction<Term>
+where Term: FixedWidthInteger & Operatable & Negateable & Raisable {
 	
 	// MARK: - Creating Fractions
 	
@@ -15,8 +16,7 @@ public struct MixedFraction {
 	/// - parameter integral: The integral part.
 	/// - parameter fractional: The fractional part.
 	/// - Warning: Passing in Int.min in any parameters will cause a fatal error.
-	internal init<Value>(_ integral: Value, and fractional: Fraction)
-	where Value: BinaryInteger {
+	internal init(_ integral: Term, and fractional: Fraction<Term>) {
 		self.integral = .init(integral)
 		self.fractional = fractional
 	}
@@ -27,26 +27,25 @@ public struct MixedFraction {
 	/// - parameter numerator: The numerator.
 	/// - parameter denominator: The denominator.
 	/// - Warning: Passing in Int.min in any parameters will cause a fatal error.
-	public init<Value>(_ integral: Value, _ numerator: Value, on denominator: Value)
-	where Value: BinaryInteger {
+	public init(_ integral: Term, _ numerator: Term, on denominator: Term) {
 		self.init(integral, and: .init(numerator, on: denominator))
 	}
 	
 	// MARK: - Fraction Properties
 	
 	/// The integral part of this fraction.
-	public let integral: Int
+	public let integral: Term
 	
 	/// The fractional part of this fraction.
-	public let fractional: Fraction
+	public let fractional: Fraction<Term>
 	
 	/// The numerator of this fraction.
-	public var numerator: Int {
+	public var numerator: Term {
 		self.fractional.numerator
 	}
 	
 	/// The denominator of this fraction.
-	public var denominator: Int {
+	public var denominator: Term {
 		self.fractional.denominator
 	}
 	
@@ -82,8 +81,8 @@ public struct MixedFraction {
 	///
 	/// - returns: The mixed fraction.
 	public func mixed() -> Self {
-		let newIntegral: Int = self.integral + self.numerator / self.denominator
-		let newNumerator: Int = self.numerator % self.denominator
+		let newIntegral: Term = self.integral + self.numerator / self.denominator
+		let newNumerator: Term = self.numerator % self.denominator
 		return .init(newIntegral, newNumerator, on: self.denominator)
 	}
 	
@@ -109,8 +108,8 @@ public struct MixedFraction {
 	///
 	/// - returns: The unmixed fraction.
 	public func unmixed() -> Self {
-		let newNumerator: Int = self.integral * self.denominator + self.numerator
-		let newDenominator: Int = self.denominator
+		let newNumerator: Term = self.integral * self.denominator + self.numerator
+		let newDenominator: Term = self.denominator
 		return .init(0, newNumerator, on: newDenominator)
 	}
 	

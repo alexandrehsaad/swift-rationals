@@ -5,7 +5,8 @@
 // Licensed under Apache License v2.0 with Runtime Library Exception
 //
 
-extension Fraction: Encodable {
+extension Fraction: Encodable
+where Term: Encodable {
 	public func encode(to encoder: Encoder) throws {
 		var container: KeyedEncodingContainer<FractionCodingKeys> = encoder.container(keyedBy: Self.FractionCodingKeys.self)
 

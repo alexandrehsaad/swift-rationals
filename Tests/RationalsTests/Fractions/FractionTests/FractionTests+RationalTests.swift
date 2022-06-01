@@ -1,4 +1,4 @@
-// FractionTests+FractionableTests.swift
+// FractionTests+RationalTests.swift
 // RationalsTests
 //
 // Copyright © 2021-2022 Alexandre H. Saad
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Rationals
 
-extension FractionTests: FractionableTests {
+extension FractionTests: RationalTests {
 	func test_quotientSucceeds() {
 		// Given
 		let value: TestSubject = .init(3, on: 2)
@@ -98,22 +98,6 @@ extension FractionTests: FractionableTests {
 
 		// Then
 		XCTAssertTrue(value.isWhole)
-	}
-	
-	func test_isDyadicReturnsFalse() {
-		// Given
-		let fraction: TestSubject = .init(1, on: 3)
-		
-		// Then
-		XCTAssertFalse(fraction.isDyadic)
-	}
-	
-	func test_isDyadicReturnsTrue() {
-		// Given
-		let fraction: TestSubject = .init(1, on: 2)
-		
-		// Then
-		XCTAssertTrue(fraction.isDyadic)
 	}
 	
 	func test_isLikeReturnsFalse() {

@@ -9,7 +9,7 @@ import XCTest
 @testable import Rationals
 
 final class MixedFractionTests: XCTestCase {
-	typealias TestSubject = MixedFraction
+	typealias TestSubject = MixedFraction<Int16>
 	
 	func test_isMixableReturnsFalse() {
 		// Given
