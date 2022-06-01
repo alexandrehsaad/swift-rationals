@@ -7,7 +7,7 @@
 
 /// Representing values that can be fractioned.
 public protocol Rational {
-	///
+	/// The numerator and denominator of rational numbers.
 	associatedtype Term
 	where Term: FixedWidthInteger & Operatable & Negateable & Raisable
 	
@@ -32,6 +32,63 @@ public protocol Rational {
 }
 
 extension Rational {
+	
+	// MARK: - Creating Instances
+	
+	/// Creates a new instance with the specified approximate value.
+	///
+	/// - parameter value: The approximate value.
+	/// - parameter precision: The precision.
+	private init(
+		approximately value: Double,
+		precision: Double = 1e-6
+	) {
+		var currentValue: Double = value
+		
+		var integral: Int {
+			return .init(currentValue.rounded(.down))
+		}
+		
+		var fractional: Double {
+			return currentValue - .init(integral)
+		}
+		
+		var (h, k, numerator, denominator) = (1, 0, integral, 1)
+		
+		var epsilon: Double {
+			return precision * .init(denominator * denominator)
+		}
+		
+		while fractional > epsilon {
+			currentValue = 1 / (currentValue - .init(integral))
+			
+			let newNumerator: Int = h + integral * numerator
+			let newDenominator: Int = k + integral * denominator
+			
+			(h, k, numerator, denominator) = (numerator, denominator, newNumerator, newDenominator)
+		}
+		
+		self.init(.init(numerator), on: .init(denominator))
+	}
+	
+	/// Creates a new instance with the specified approximate value.
+	///
+	/// - parameter value: The approximate value.
+	/// - parameter precision: The precision.
+	public init(
+		approximately value: Double,
+		withPrecision precision: Double = 1e-6
+	) where Self: RepresentableByNaN & RepresentableByInfinity & Negateable {
+		if value.isNaN {
+			self = .nan
+		} else if value <= Double(Int.min) {
+			self = .negativeInfinity
+		} else if Double(Int.max) < value {
+			self = .infinity
+		} else {
+			self.init(approximately: value, precision: precision)
+		}
+	}
 	
 	// MARK: - Inspecting Values
 	
@@ -152,7 +209,42 @@ where Self: Negateable {
 }
 
 extension Rational
+where Self: RepresentableByInfinity {
+	/// Creates a new instance with the specified approximate value.
+	///
+	/// - parameter value: The approximate value.
+	/// - parameter precision: The precision.
+	public init(
+		approximately value: Double,
+		withPrecision precision: Double = 1e-6
+	) where Self: Negateable {
+		if value <= Double(Int.min) {
+			self = .negativeInfinity
+		} else if Double(Int.max) < value {
+			self = .infinity
+		} else {
+			self.init(approximately: value, precision: precision)
+		}
+	}
+}
+
+extension Rational
 where Self: RepresentableByNaN {
+	/// Creates a new instance with the specified approximate value.
+	///
+	/// - parameter value: The approximate value.
+	/// - parameter precision: The precision.
+	public init(
+		approximately value: Double,
+		withPrecision precision: Double = 1e-6
+	) {
+		if value.isNaN {
+			self = .nan
+		} else {
+			self.init(approximately: value, precision: precision)
+		}
+	}
+	
 	public var isNaN: Bool {
 		return self.numerator == 0
 			&& self.denominator == 0
