@@ -5,4 +5,8 @@
 // Licensed under Apache License v2.0 with Runtime Library Exception
 //
 
-extension MixedFraction: Subtractable {}
+extension MixedFraction: Subtractable {
+	public static func - (_ lhs: Self, _ rhs: Self) -> Self {
+		return lhs + -rhs
+	}
+}
