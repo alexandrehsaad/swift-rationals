@@ -6,11 +6,6 @@
 //
 
 extension MixedFraction: Addable {
-	/// Returns the sum of adding the two specified value.
-	///
-	/// - parameter lhs: The augend.
-	/// - parameter rhs: The addend.
-	/// - returns: The sum.
 	public static func + (_ lhs: Self, _ rhs: Self) -> Self {
 		let newIntegral: Term = lhs.integral + rhs.integral
 		let newNumerator: Term

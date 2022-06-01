@@ -6,11 +6,6 @@
 //
 
 extension MixedFraction: Multipliable {
-	/// Returns the product of multiplying the two specified value.
-	///
-	/// - parameter lhs: The multiplicand.
-	/// - parameter rhs: The multiplicator.
-	/// - returns: The product.
 	public static func * (_ lhs: Self, _ rhs: Self) -> Self {
 		let lhs = lhs.unmixed()
 		let rhs = rhs.unmixed()
