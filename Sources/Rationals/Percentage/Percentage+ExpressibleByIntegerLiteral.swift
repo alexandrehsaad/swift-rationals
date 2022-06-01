@@ -7,7 +7,6 @@
 
 extension Percentage: ExpressibleByIntegerLiteral {
 	public init(integerLiteral value: IntegerLiteralType) {
-        let newNumerator: Double = .init(value)
-        self.init(newNumerator)
+        self.init(value)
     }
 }

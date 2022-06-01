@@ -7,7 +7,6 @@
 
 extension Percentage: ExpressibleByFloatLiteral {
     public init(floatLiteral value: FloatLiteralType) {
-        let newNumerator: Double = value
-        self.init(newNumerator)
+        self.init(value)
     }
 }

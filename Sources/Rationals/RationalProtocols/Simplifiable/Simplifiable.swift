@@ -10,7 +10,7 @@ public protocol Simplifiable {
 	
 	// MARK: - Inspecting Values
 	
-	/// A boolean value indicating whether this fraction is simplifiable.
+	/// A boolean value indicating whether this instance is simplifiable.
 	var isSimplifiable: Bool { get }
 	
 	// MARK: - Simplifying Values
@@ -25,7 +25,7 @@ extension Simplifiable {
 	
 	// MARK: - Inspecting Values
 	
-	/// A boolean value indicating whether this fraction is simplified.
+	/// A boolean value indicating whether this instance is simplified.
 	///
 	/// A simplified fraction is a fraction reduced to its lowest terms.
 	///
@@ -40,7 +40,7 @@ extension Simplifiable {
 	
 	// MARK: - Simplifying Values
 	
-	/// A function to reduce this fraction to its lowest terms.
+	/// A function to reduce this instance to its lowest terms.
 	///
 	/// ```swift
 	/// var fraction: Fraction = .init(2, on: 4)
