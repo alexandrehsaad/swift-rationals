@@ -5,7 +5,8 @@
 // Licensed under Apache License v2.0 with Runtime Library Exception
 //
 
-extension MixedFraction: Encodable {
+extension MixedFraction: Encodable
+where Term: Encodable {
 	public func encode(to encoder: Encoder) throws {
 		var container: KeyedEncodingContainer<MixedFractionCodingKeys> = encoder.container(keyedBy: Self.MixedFractionCodingKeys.self)
 

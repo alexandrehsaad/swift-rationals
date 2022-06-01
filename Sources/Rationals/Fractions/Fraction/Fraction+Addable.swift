@@ -18,8 +18,8 @@ extension Fraction: Addable {
 	/// - parameter rhs: The addend.
 	/// - returns: The sum.
 	public static func + (_ lhs: Self, _ rhs: Self) -> Self {
-		let newNumerator: Int
-		let newDenominator: Int
+		let newNumerator: Term
+		let newDenominator: Term
 		
 		if lhs.isLike(rhs) {
 			newNumerator = lhs.numerator + rhs.numerator

@@ -9,21 +9,20 @@ extension MixedFraction: ExpressibleByFloatLiteral {
 	public init(floatLiteral value: FloatLiteralType) {
 		if value.isNaN {
 			self = .nan
-		} else if value <= Double(Int.min) {
+		} else if value <= Double(Term.min) {
 			self = .negativeInfinity
-		} else if Double(Int.max) < value {
+		} else if Double(Term.max) < value {
 			self = .infinity
 		} else {
 			
-			let lhs: IntegerLiteralType = .init(value.integral)
-			let rhs: Int = .init(value.decimal)
+			let lhs: Term = .init(value.integral)
+			let rhs: Term = .init(value.decimal)
 
 			if rhs == .zero {
-				let newNumerator: IntegerLiteralType = lhs
-				self.init(integerLiteral: newNumerator)
+				self.init(0, lhs, on: 1)
 			} else {
-				let newDenominator: Int = 10 ** value.countPlaces
-				let newNumerator: Int = .init(lhs * newDenominator + rhs)
+				let newDenominator: Term = 10 ** value.countPlaces
+				let newNumerator: Term = .init(lhs * newDenominator + rhs)
 				self.init(0, newNumerator, on: newDenominator)
 			}
 		}

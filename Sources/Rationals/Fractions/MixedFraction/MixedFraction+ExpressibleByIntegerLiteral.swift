@@ -7,6 +7,6 @@
 
 extension MixedFraction: ExpressibleByIntegerLiteral {
 	public init(integerLiteral value: IntegerLiteralType) {
-		self.init(0, value, on: 1)
+		self.init(0, .init(value), on: 1)
 	}
 }

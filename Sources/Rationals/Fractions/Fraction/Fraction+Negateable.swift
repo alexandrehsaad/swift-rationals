@@ -11,12 +11,12 @@ extension Fraction: Negateable {
 			return .nan
 		}
 		
-		guard Int.min < operand.numerator else {
+		guard Term.min < operand.numerator else {
 			return .infinity
 		}
 		
-		let newNumerator: Int = -operand.numerator
-		let newDenominator: Int = operand.denominator
+		let newNumerator: Term = -operand.numerator
+		let newDenominator: Term = operand.denominator
 		
 		return .init(newNumerator, on: newDenominator)
 	}

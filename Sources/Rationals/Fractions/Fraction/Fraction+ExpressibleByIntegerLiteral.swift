@@ -7,6 +7,6 @@
 
 extension Fraction: ExpressibleByIntegerLiteral {
 	public init(integerLiteral value: IntegerLiteralType) {
-		self.init(value, on: 1)
+		self.init(.init(value), on: 1)
     }
 }

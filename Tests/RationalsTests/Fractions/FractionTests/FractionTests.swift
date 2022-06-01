@@ -9,7 +9,7 @@ import XCTest
 @testable import Rationals
 
 final class FractionTests: XCTestCase {
-	typealias TestSubject =  Fraction
+	typealias TestSubject =  Fraction<Int16>
 	
 	func test_initializedApproximatlySucceeds() {
 		// Given

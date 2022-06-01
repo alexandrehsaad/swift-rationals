@@ -18,8 +18,8 @@ extension Fraction: Multipliable {
 	/// - parameter rhs: The multiplicator.
 	/// - returns: The product.
 	public static func * (_ lhs: Self, _ rhs: Self) -> Self {
-		let newNumerator: Int = lhs.numerator * rhs.numerator
-		let newDenominator: Int = lhs.denominator * rhs.denominator
+		let newNumerator: Term = lhs.numerator * rhs.numerator
+		let newDenominator: Term = lhs.denominator * rhs.denominator
 		
 		return .init(newNumerator, on: newDenominator)
 	}

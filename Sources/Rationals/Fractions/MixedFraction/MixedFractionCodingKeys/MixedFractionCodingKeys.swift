@@ -8,7 +8,10 @@
 extension MixedFraction {
 	/// The coding keys for the codable protocol.
 	internal enum MixedFractionCodingKeys: String, CodingKey {
+		///
 		case integral
+		
+		///
 		case fractional
 	}
 }

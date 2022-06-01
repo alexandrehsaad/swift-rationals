@@ -19,7 +19,8 @@ extension MixedFraction: LosslessStringConvertible {
 			self.init(floatLiteral: value)
 		} else {
 			
-			var substrings: Array<Substring> = description.split(separator: " ", maxSplits: 2, omittingEmptySubsequences: false)
+			var substrings: Array<Substring> = description
+				.split(separator: " ", maxSplits: 2, omittingEmptySubsequences: false)
 			
 			if substrings.count != 2 {
 				substrings.insert("0", at: 0)
@@ -34,7 +35,7 @@ extension MixedFraction: LosslessStringConvertible {
 				return nil
 			}
 			
-			self.init(newIntegral, newNumerator, on: newDenominator)
+			self.init(.init(newIntegral), .init(newNumerator), on: .init(newDenominator))
 		}
 	}
 }

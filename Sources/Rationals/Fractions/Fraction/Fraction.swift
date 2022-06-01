@@ -6,7 +6,8 @@
 //
 
 /// A representation of a fraction, or the quotient of two numbers without loss of precision.
-public struct Fraction {
+public struct Fraction<Term>
+where Term: FixedWidthInteger & Operatable & Negateable & Raisable {
 	
 	// MARK: - Creating Fractions
 	
@@ -14,7 +15,10 @@ public struct Fraction {
 	///
 	/// - parameter value: The approximate value.
 	/// - parameter precision: The precision.
-	public init(approximately value: Double, withPrecision precision: Double = 1e-6) {
+	public init(
+		approximately value: Double,
+		withPrecision precision: Double = 1e-6
+	) {
 		if value.isNaN {
 			self = .nan
 		} else if value <= Double(Int.min) {
@@ -48,15 +52,15 @@ public struct Fraction {
 				(h, k, numerator, denominator) = (numerator, denominator, newNumerator, newDenominator)
 			}
 			
-			self.init(numerator, on: denominator)
+			self.init(.init(numerator), on: .init(denominator))
 		}
 	}
 	
 	// MARK: - Fraction Properties
 	
 	/// The numerator of this fraction.
-	public let numerator: Int
+	public let numerator: Term
 	
 	/// The denominator of this fraction.
-	public let denominator: Int
+	public let denominator: Term
 }

@@ -11,13 +11,14 @@ extension MixedFraction: Negateable {
 			return .nan
 		}
 		
-		guard Int.min < operand.integral && Int.min < operand.numerator else {
+		guard Term.min < operand.integral
+		&& Term.min < operand.numerator else {
 			return .infinity
 		}
 		
-		let newIntegral: Int = -operand.integral
-		let newNumerator: Int = -operand.numerator
-		let newDenominator: Int = operand.denominator
+		let newIntegral: Term = -operand.integral
+		let newNumerator: Term = -operand.numerator
+		let newDenominator: Term = operand.denominator
 		
 		return .init(newIntegral, newNumerator, on: newDenominator)
 	}

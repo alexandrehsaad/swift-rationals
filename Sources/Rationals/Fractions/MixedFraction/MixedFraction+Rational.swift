@@ -1,13 +1,12 @@
-// MixedFraction+Fractionable.swift
+// MixedFraction+Rational.swift
 // Rationals
 //
 // Copyright © 2021-2022 Alexandre H. Saad
 // Licensed under Apache License v2.0 with Runtime Library Exception
 //
 
-extension MixedFraction: Fractionable {
-	public init<Value>(_ numerator: Value, on denominator: Value = 1)
-	where Value: BinaryInteger {
+extension MixedFraction: Rational {
+	public init(_ numerator: Term, on denominator: Term = 1) {
 		self.init(0, and: .init(numerator, on: denominator))
 	}
 	
