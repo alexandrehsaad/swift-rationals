@@ -5,7 +5,8 @@
 // Licensed under Apache License v2.0 with Runtime Library Exception
 //
 
-extension MixedFraction: Addable {
+extension MixedFraction: Addable
+where Term: Addable {
 	public static func + (_ lhs: Self, _ rhs: Self) -> Self {
 		let integral: Term = lhs.integral + rhs.integral
 		let numerator: Term

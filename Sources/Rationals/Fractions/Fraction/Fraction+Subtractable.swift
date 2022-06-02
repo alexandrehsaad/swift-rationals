@@ -5,7 +5,8 @@
 // Licensed under Apache License v2.0 with Runtime Library Exception
 //
 
-extension Fraction: Subtractable {
+extension Fraction: Subtractable
+where Term: Subtractable {
 	/// Returns the difference of subracting the second specified value from the first.
 	///
 	/// ```swift

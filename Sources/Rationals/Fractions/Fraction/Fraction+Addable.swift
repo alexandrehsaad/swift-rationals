@@ -5,7 +5,8 @@
 // Licensed under Apache License v2.0 with Runtime Library Exception
 //
 
-extension Fraction: Addable {
+extension Fraction: Addable
+where Term: Addable {
 	/// Returns the sum of adding the two specified value.
 	///
 	/// ```swift

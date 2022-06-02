@@ -5,7 +5,8 @@
 // Licensed under Apache License v2.0 with Runtime Library Exception
 //
 
-extension MixedFraction: ExpressibleByFloatLiteral {
+extension MixedFraction: ExpressibleByFloatLiteral
+where Term: Negateable {
 	public init(floatLiteral value: FloatLiteralType) {
 		if value.isNaN {
 			self = .nan
@@ -21,9 +22,13 @@ extension MixedFraction: ExpressibleByFloatLiteral {
 			if decimal == .zero {
 				self.init(0, integral, on: 1)
 			} else {
-				let newDenominator: Term = 10 ** value.countPlaces
-				let numerator: Term = .init(integral * newDenominator + decimal)
-				self.init(0, numerator, on: newDenominator)
+				var denominator: Term = 1
+				for _ in 1...value.countPlaces {
+					denominator *= 10
+				}
+				
+				let numerator: Term = .init(integral * denominator + decimal)
+				self.init(0, numerator, on: denominator)
 			}
 		}
 	}
