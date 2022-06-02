@@ -1,4 +1,4 @@
-// FractionTests+RepresentableByNaNTests.swift
+// SignedFractionTests+RepresentableByNaNTests.swift
 // RationalsTests
 //
 // Copyright © 2021-2022 Alexandre H. Saad
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Rationals
 
-extension FractionTests {
+extension SignedFractionTests {
 	func test_isNaNReturnsFalse() {
 		// Given
 		let value: TestSubject = 1.0

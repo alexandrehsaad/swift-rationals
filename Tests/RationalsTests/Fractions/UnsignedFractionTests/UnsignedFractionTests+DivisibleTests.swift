@@ -1,4 +1,4 @@
-// FractionTests+DivisibleTests.swift
+// UnsignedFractionTests+DivisibleTests.swift
 // RationalsTests
 //
 // Copyright © 2021-2022 Alexandre H. Saad
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Rationals
 
-extension FractionTests {
+extension UnsignedFractionTests {
 	func test_isInvertibleReturnsFalse() {
 		// Given
 		let value: TestSubject = .zero

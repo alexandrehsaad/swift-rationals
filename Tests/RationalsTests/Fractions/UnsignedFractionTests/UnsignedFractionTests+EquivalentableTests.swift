@@ -1,4 +1,4 @@
-// FractionTests+EquivalentableTests.swift
+// UnsignedFractionTests+EquivalentableTests.swift
 // RationalsTests
 //
 // Copyright © 2021-2022 Alexandre H. Saad
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Rationals
 
-extension FractionTests {
+extension UnsignedFractionTests {
 	func test_isEquivalentToReturnsFalse() {
 		// Given
 		let lhs: TestSubject = .init(1, on: 2)

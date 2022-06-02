@@ -1,4 +1,4 @@
-// FractionTests+ExpressibleByIntegerLiteralTests.swift
+// SignedFractionTests+ExpressibleByFloatLiteralTests.swift
 // RationalsTests
 //
 // Copyright © 2021-2022 Alexandre H. Saad
@@ -8,15 +8,15 @@
 import XCTest
 @testable import Rationals
 
-extension FractionTests {
-	func test_initializedWithIntegerLiteralSucceeds() {
+extension SignedFractionTests {
+	func test_initializedWithFloatLiteralSucceeds() {
 		// Given
-		let fraction: TestSubject = 4
+		let fraction: TestSubject = 4.5
 		
 		// When
 		let value: Double = fraction.quotient
 		
 		// Then
-		XCTAssertEqual(value, 4)
+		XCTAssertEqual(value, 4.5)
 	}
 }
