@@ -15,7 +15,7 @@ extension MixedFraction: Divisible {
 	}
 	
 	public static func / (_ lhs: Self, _ rhs: Self) -> Self {
-		guard lhs.isZero == false && rhs.isZero == false else {
+		guard rhs.isZero == false else {
 			return .nan
 		}
 		
@@ -31,7 +31,25 @@ extension MixedFraction: Divisible {
 	}
 	
 	public static func % (_ lhs: Self, _ rhs: Self) -> Self {
-		let value: Double = lhs.quotient % rhs.quotient
-		return .init(floatLiteral: value)
+		guard rhs.isZero == false else {
+			return .nan
+		}
+		
+		if lhs.isFinite && rhs.isInfinite {
+			return .zero
+		}
+		
+		let numerator: Term
+		let denominator: Term
+
+		if lhs.isLike(rhs) {
+			numerator = lhs.numerator % rhs.numerator
+			denominator = lhs.denominator
+		} else {
+			numerator = (lhs.numerator * rhs.denominator) % (lhs.denominator * rhs.numerator)
+			denominator = lhs.denominator * rhs.denominator
+		}
+
+		return .init(numerator, on: denominator)
 	}
 }

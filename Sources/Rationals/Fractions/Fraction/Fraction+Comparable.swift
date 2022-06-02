@@ -20,6 +20,10 @@ extension Fraction: Comparable {
             return false
         }
         
-        return lhs.quotient < rhs.quotient
+		if lhs.isLike(rhs) {
+			return lhs.numerator < rhs.denominator
+		} else {
+			return lhs.quotient < rhs.quotient
+		}
     }
 }

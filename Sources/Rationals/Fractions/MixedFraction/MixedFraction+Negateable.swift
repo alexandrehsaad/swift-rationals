@@ -5,14 +5,15 @@
 // Licensed under Apache License v2.0 with Runtime Library Exception
 //
 
-extension MixedFraction: Negateable {
+extension MixedFraction: Negateable
+where Term: Negateable {
 	public prefix static func - (operand: Self) -> Self {
 		guard operand.isNaN == false else {
 			return .nan
 		}
 		
 		guard Term.min < operand.integral
-		&& Term.min < operand.numerator else {
+			  && Term.min < operand.numerator else {
 			return .infinity
 		}
 		

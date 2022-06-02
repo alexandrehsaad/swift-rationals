@@ -7,7 +7,7 @@
 
 /// A representation of a fraction, or the quotient of two numbers without loss of precision.
 public struct Fraction<Term>
-where Term: FixedWidthInteger & Operatable & Raisable {
+where Term: FixedWidthInteger {
 	
 	// MARK: - Fraction Properties
 	

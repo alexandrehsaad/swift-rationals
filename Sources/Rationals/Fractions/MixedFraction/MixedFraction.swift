@@ -7,7 +7,7 @@
 
 /// A representation of a mixed fraction, or the sum of two fractions without loss of precision.
 public struct MixedFraction<Term>
-where Term: FixedWidthInteger & Operatable & Negateable & Raisable {
+where Term: FixedWidthInteger {
 	
 	// MARK: - Creating Fractions
 	

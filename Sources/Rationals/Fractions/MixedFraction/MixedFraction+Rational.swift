@@ -7,7 +7,8 @@
 
 extension MixedFraction: Rational {
 	public init(_ numerator: Term, on denominator: Term = 1) {
-		self.init(0, and: .init(numerator, on: denominator))
+		self.integral = 0
+		self.fractional = .init(numerator, on: denominator)
 	}
 	
 	public var quotient: Double {

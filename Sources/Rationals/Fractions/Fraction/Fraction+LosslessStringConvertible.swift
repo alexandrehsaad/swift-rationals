@@ -8,6 +8,22 @@
 import NumericProtocols
 
 extension Fraction: LosslessStringConvertible {
+	///
+	///
+	/// - parameter description:
+	private init?(description: String) {
+		let substrings: Array<Substring> = description
+			.split(separator: "/", maxSplits: 2, omittingEmptySubsequences: false)
+		
+		guard substrings.count == 2,
+			  let numerator: Term = .init(substrings[0]),
+			  let denominator: Term = .init(substrings[1]) else {
+			return nil
+		}
+		
+		self.init(numerator, on: denominator)
+	}
+	
     public init?(_ description: String) {
         if description == "-nan" || description == "+nan" || description == "nan" {
             self = .nan
@@ -18,17 +34,7 @@ extension Fraction: LosslessStringConvertible {
         } else if Double(description) != nil {
 			return nil
         } else {
-            
-            let substrings: Array<Substring> = description
-				.split(separator: "/", maxSplits: 2, omittingEmptySubsequences: false)
-            
-            guard substrings.count == 2,
-		    let numerator: Term = .init(substrings[0]),
-		    let denominator: Term = .init(substrings[1]) else {
-                return nil
-            }
-            
-			self.init(numerator, on: denominator)
+			self.init(description: description)
         }
     }
 }
@@ -47,17 +53,7 @@ where Term: Negateable {
 		} else if let value = Double(description) {
 			self.init(floatLiteral: value)
 		} else {
-			
-			let substrings: Array<Substring> = description
-				.split(separator: "/", maxSplits: 2, omittingEmptySubsequences: false)
-			
-			guard substrings.count == 2,
-				  let numerator: Term = .init(substrings[0]),
-				  let denominator: Term = .init(substrings[1]) else {
-				return nil
-			}
-			
-			self.init(numerator, on: denominator)
+			self.init(description: description)
 		}
 	}
 }
