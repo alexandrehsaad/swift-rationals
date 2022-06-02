@@ -5,26 +5,31 @@
 // Licensed under Apache License v2.0 with Runtime Library Exception
 //
 
-extension Fraction: ExpressibleByFloatLiteral {
-    public init(floatLiteral value: FloatLiteralType) {
-        if value.isNaN {
-            self = .nan
-        } else if value <= Double(Term.min) {
+extension Fraction: ExpressibleByFloatLiteral
+where Term: Negateable {
+	public init(floatLiteral value: FloatLiteralType) {
+		if value.isNaN {
+			self = .nan
+		} else if value <= Double(Term.min) {
 			self = .negativeInfinity
-        } else if Double(Term.max) < value {
-            self = .infinity
-        } else {
-            
-			let lhs: Term = .init(value.integral)
-            let rhs: Term = .init(value.decimal)
+		} else if Double(Term.max) < value {
+			self = .infinity
+		} else {
+			
+			let integral: Term = .init(value.integral)
+			let decimal: Term = .init(value.decimal)
 
-            if rhs == .zero {
-				self.init(lhs, on: 1)
-            } else {
-                let newDenominator: Term = 10 ** value.countPlaces
-                let newNumerator: Term = .init(lhs * newDenominator + rhs)
-                self.init(newNumerator, on: newDenominator)
-            }
-        }
-    }
+			if decimal == .zero {
+				self.init(integral, on: 1)
+			} else {
+				var denominator: Term = 1
+				for _ in 1...value.countPlaces {
+					denominator *= 10
+				}
+				
+				let numerator: Term = .init(integral * denominator + decimal)
+				self.init(numerator, on: denominator)
+			}
+		}
+	}
 }

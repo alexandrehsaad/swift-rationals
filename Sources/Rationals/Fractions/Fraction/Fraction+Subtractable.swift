@@ -19,6 +19,17 @@ extension Fraction: Subtractable {
 	/// - parameter rhs: The subtrahend.
 	/// - returns: The difference.
 	public static func - (_ lhs: Self, _ rhs: Self) -> Self {
-		return lhs + -rhs
+		let numerator: Term
+		let denominator: Term
+		
+		if lhs.isLike(rhs) {
+			numerator = lhs.numerator - rhs.numerator
+			denominator = lhs.denominator
+		} else {
+			numerator = lhs.numerator * rhs.denominator - lhs.denominator * rhs.numerator
+			denominator = lhs.denominator * rhs.denominator
+		}
+		
+		return .init(numerator, on: denominator)
 	}
 }

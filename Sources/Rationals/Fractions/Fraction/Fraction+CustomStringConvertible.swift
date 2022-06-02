@@ -19,8 +19,7 @@ extension Fraction: CustomStringConvertible {
         }
         
         guard self.isInfinite == false else {
-            let sign: String = self.isNegative ? "-" : ""
-            return sign + "inf"
+            return "inf"
         }
         
         guard self.isZero == false else {
@@ -33,4 +32,35 @@ extension Fraction: CustomStringConvertible {
         
 		return numerator + `operator` + denominator
     }
+}
+
+extension Fraction
+where Term: Negateable {
+	/// A textual representation of this instance.
+	///
+	/// ```swift
+	/// let fraction: Fraction = .init(1, on: 2)
+	/// print(fraction)
+	/// // Prints "1/2"
+	/// ```
+	public var description: String {
+		guard self.isNaN == false else {
+			return "nan"
+		}
+		
+		guard self.isInfinite == false else {
+			let sign: String = self.isNegative ? "-" : ""
+			return sign + "inf"
+		}
+		
+		guard self.isZero == false else {
+			return "0"
+		}
+		
+		let numerator: String = self.numerator.description
+		let `operator`: String = "/"
+		let denominator: String = self.denominator.description
+		
+		return numerator + `operator` + denominator
+	}
 }

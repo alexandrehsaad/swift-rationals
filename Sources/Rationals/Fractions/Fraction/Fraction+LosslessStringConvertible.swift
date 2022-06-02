@@ -5,30 +5,59 @@
 // Licensed under Apache License v2.0 with Runtime Library Exception
 //
 
+import NumericProtocols
+
 extension Fraction: LosslessStringConvertible {
     public init?(_ description: String) {
-        if description == "-nan" || description == "nan" {
+        if description == "-nan" || description == "+nan" || description == "nan" {
             self = .nan
-        } else if description == "-inf" {
-            self = .negativeInfinity
-        } else if description == "inf" {
+        } else if description == "+inf" || description == "inf" {
             self = .infinity
         } else if let value = Int(description) {
-            self.init(integerLiteral: value)
-        } else if let value = Double(description) {
-            self.init(floatLiteral: value)
+			self.init(integerLiteral: value)
+        } else if Double(description) != nil {
+			return nil
         } else {
             
             let substrings: Array<Substring> = description
 				.split(separator: "/", maxSplits: 2, omittingEmptySubsequences: false)
             
             guard substrings.count == 2,
-		    let newNumerator: Int = .init(substrings[0]),
-		    let newDenominator: Int = .init(substrings[1]) else {
+		    let numerator: Term = .init(substrings[0]),
+		    let denominator: Term = .init(substrings[1]) else {
                 return nil
             }
             
-			self.init(.init(newNumerator), on: .init(newDenominator))
+			self.init(numerator, on: denominator)
         }
     }
+}
+
+extension Fraction
+where Term: Negateable {
+	public init?(_ description: String) {
+		if description == "-nan" || description == "+nan" || description == "nan" {
+			self = .nan
+		} else if description == "-inf" {
+			self = .negativeInfinity
+		} else if description == "+inf" || description == "inf" {
+			self = .infinity
+		} else if let value = Int(description) {
+			self.init(integerLiteral: value)
+		} else if let value = Double(description) {
+			self.init(floatLiteral: value)
+		} else {
+			
+			let substrings: Array<Substring> = description
+				.split(separator: "/", maxSplits: 2, omittingEmptySubsequences: false)
+			
+			guard substrings.count == 2,
+				  let numerator: Term = .init(substrings[0]),
+				  let denominator: Term = .init(substrings[1]) else {
+				return nil
+			}
+			
+			self.init(numerator, on: denominator)
+		}
+	}
 }

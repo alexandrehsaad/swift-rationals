@@ -16,10 +16,10 @@ extension MixedFraction: Negateable {
 			return .infinity
 		}
 		
-		let newIntegral: Term = -operand.integral
-		let newNumerator: Term = -operand.numerator
-		let newDenominator: Term = operand.denominator
+		let integral: Term = -operand.integral
+		let numerator: Term = -operand.numerator
+		let denominator: Term = operand.denominator
 		
-		return .init(newIntegral, newNumerator, on: newDenominator)
+		return .init(integral, numerator, on: denominator)
 	}
 }

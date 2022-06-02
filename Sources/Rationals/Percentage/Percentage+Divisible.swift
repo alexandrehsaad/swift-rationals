@@ -27,7 +27,7 @@ extension Percentage: Divisible {
 	/// - parameter lhs: The dividend.
 	/// - parameter rhs: The divisor.
 	/// - returns: The remainder.
-	public static func % (lhs: Self, rhs: Self) -> Self {
+	public static func % (_ lhs: Self, _ rhs: Self) -> Self {
 		let newValue: Double = lhs.quotient % rhs.quotient
 		return .init(floatLiteral: newValue)
 	}

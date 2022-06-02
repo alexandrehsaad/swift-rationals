@@ -10,9 +10,9 @@ extension MixedFraction: Multipliable {
 		let lhs = lhs.unmixed()
 		let rhs = rhs.unmixed()
 		
-		let newNumerator: Term = lhs.numerator * rhs.numerator
-		let newDenominator: Term = lhs.denominator * rhs.denominator
+		let numerator: Term = lhs.numerator * rhs.numerator
+		let denominator: Term = lhs.denominator * rhs.denominator
 		
-		return .init(0, newNumerator, on: newDenominator)
+		return .init(0, numerator, on: denominator)
 	}
 }
