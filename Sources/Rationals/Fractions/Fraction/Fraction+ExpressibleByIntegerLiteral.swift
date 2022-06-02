@@ -7,6 +7,7 @@
 
 extension Fraction: ExpressibleByIntegerLiteral {
 	public init(integerLiteral value: IntegerLiteralType) {
-		self.init(.init(value), on: 1)
+		let numerator: Term = .init(value)
+		self.init(numerator, on: 1)
     }
 }

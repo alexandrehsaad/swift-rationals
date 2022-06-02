@@ -5,7 +5,8 @@
 // Licensed under Apache License v2.0 with Runtime Library Exception
 //
 
-extension Fraction: Negateable {
+extension Fraction: Negateable
+where Term: Negateable {
 	public prefix static func - (operand: Self) -> Self {
 		guard operand.isNaN == false else {
 			return .nan
@@ -15,9 +16,9 @@ extension Fraction: Negateable {
 			return .infinity
 		}
 		
-		let newNumerator: Term = -operand.numerator
-		let newDenominator: Term = operand.denominator
+		let numerator: Term = -operand.numerator
+		let denominator: Term = operand.denominator
 		
-		return .init(newNumerator, on: newDenominator)
+		return .init(numerator, on: denominator)
 	}
 }

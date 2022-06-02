@@ -115,6 +115,30 @@ extension FractionTests {
 		XCTAssertEqual(quotient, 6/2)
 	}
 	
+	func test_remainderReturnsNonLike() {
+		// Given
+		let dividend: TestSubject = 18/3
+		let divisor: TestSubject = 5/2
+		
+		// When
+		let quotient: TestSubject = dividend % divisor
+
+		// Then
+		XCTAssertEqual(quotient, 6/6)
+	}
+	
+	func test_remainderSucceeds() {
+		// Given
+		let dividend: TestSubject = 17/2
+		let divisor: TestSubject = 5/2
+		
+		// When
+		let quotient: TestSubject = dividend % divisor
+
+		// Then
+		XCTAssertEqual(quotient, 2/2)
+	}
+	
 	func test_dividingBySucceeds() {
 		// Given
 		let dividend: TestSubject = 6

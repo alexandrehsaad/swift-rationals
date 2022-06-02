@@ -6,7 +6,7 @@
 //
 
 extension Fraction: Equatable {
-    public static func == (lhs: Self, rhs: Self) -> Bool {
+    public static func == (_ lhs: Self, _ rhs: Self) -> Bool {
         guard lhs.isNaN == false && rhs.isNaN == false else {
             return false
         }

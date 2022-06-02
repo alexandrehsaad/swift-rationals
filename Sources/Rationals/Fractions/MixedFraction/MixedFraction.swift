@@ -15,7 +15,7 @@ where Term: FixedWidthInteger & Operatable & Negateable & Raisable {
 	///
 	/// - parameter integral: The integral part.
 	/// - parameter fractional: The fractional part.
-	/// - Warning: Passing in Int.min in any parameters will cause a fatal error.
+	/// - Warning: Passing in Term.min in any parameters will cause a fatal error.
 	internal init(_ integral: Term, and fractional: Fraction<Term>) {
 		self.integral = .init(integral)
 		self.fractional = fractional
@@ -26,7 +26,7 @@ where Term: FixedWidthInteger & Operatable & Negateable & Raisable {
 	/// - parameter integral: The integral part.
 	/// - parameter numerator: The numerator.
 	/// - parameter denominator: The denominator.
-	/// - Warning: Passing in Int.min in any parameters will cause a fatal error.
+	/// - Warning: Passing in Term.min in any parameters will cause a fatal error.
 	public init(_ integral: Term, _ numerator: Term, on denominator: Term) {
 		self.init(integral, and: .init(numerator, on: denominator))
 	}
@@ -81,9 +81,9 @@ where Term: FixedWidthInteger & Operatable & Negateable & Raisable {
 	///
 	/// - returns: The mixed fraction.
 	public func mixed() -> Self {
-		let newIntegral: Term = self.integral + self.numerator / self.denominator
+		let integral: Term = self.integral + self.numerator / self.denominator
 		let newNumerator: Term = self.numerator % self.denominator
-		return .init(newIntegral, newNumerator, on: self.denominator)
+		return .init(integral, newNumerator, on: self.denominator)
 	}
 	
 	/// A function to convert this fraction to a mixed fraction.

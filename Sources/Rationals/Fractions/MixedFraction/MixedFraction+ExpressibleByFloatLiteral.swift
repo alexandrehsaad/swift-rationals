@@ -15,15 +15,15 @@ extension MixedFraction: ExpressibleByFloatLiteral {
 			self = .infinity
 		} else {
 			
-			let lhs: Term = .init(value.integral)
-			let rhs: Term = .init(value.decimal)
+			let integral: Term = .init(value.integral)
+			let decimal: Term = .init(value.decimal)
 
-			if rhs == .zero {
-				self.init(0, lhs, on: 1)
+			if decimal == .zero {
+				self.init(0, integral, on: 1)
 			} else {
 				let newDenominator: Term = 10 ** value.countPlaces
-				let newNumerator: Term = .init(lhs * newDenominator + rhs)
-				self.init(0, newNumerator, on: newDenominator)
+				let numerator: Term = .init(integral * newDenominator + decimal)
+				self.init(0, numerator, on: newDenominator)
 			}
 		}
 	}

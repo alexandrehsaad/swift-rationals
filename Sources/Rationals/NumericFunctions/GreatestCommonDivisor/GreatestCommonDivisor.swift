@@ -24,3 +24,23 @@ where Value: Divisible & ExpressibleByIntegerLiteral {
 		return rhs
 	}
 }
+
+/// Returns the greatest common divisor.
+///
+/// ```swift
+/// print(gcd(48, 18))
+/// // Prints "6"
+/// ```
+///
+/// - parameter lhs: The left value.
+/// - parameter rhs: The right value.
+/// - returns: The greatest common divisor.
+internal func gcd<Value>(_ lhs: Value, _ rhs: Value) -> Value
+where Value: BinaryInteger {
+	let remainder: Value = lhs % rhs
+	if remainder != 0 {
+		return gcd(rhs, remainder)
+	} else {
+		return rhs
+	}
+}

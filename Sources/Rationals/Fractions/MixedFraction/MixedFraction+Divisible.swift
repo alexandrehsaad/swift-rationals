@@ -30,8 +30,8 @@ extension MixedFraction: Divisible {
 		return lhs * reciprocal
 	}
 	
-	public static func % (lhs: Self, rhs: Self) -> Self {
-		let newValue: Double = lhs.quotient % rhs.quotient
-		return .init(floatLiteral: newValue)
+	public static func % (_ lhs: Self, _ rhs: Self) -> Self {
+		let value: Double = lhs.quotient % rhs.quotient
+		return .init(floatLiteral: value)
 	}
 }

@@ -15,7 +15,7 @@ extension Fraction: Comparable {
     /// - parameter lhs: A value to compare.
     /// - parameter rhs: Another value to compare.
     /// - returns: `true` if lhs is smaller, and `false` otherwise.
-    public static func < (lhs: Self, rhs: Self) -> Bool {
+    public static func < (_ lhs: Self, _ rhs: Self) -> Bool {
         guard lhs.isNaN == false && rhs.isNaN == false else {
             return false
         }

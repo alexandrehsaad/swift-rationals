@@ -5,11 +5,13 @@
 // Licensed under Apache License v2.0 with Runtime Library Exception
 //
 
+import NumericProtocols
+
 /// Representing values that can be fractioned.
 public protocol Rational {
 	/// The numerator and denominator of rational numbers.
 	associatedtype Term
-	where Term: FixedWidthInteger & Operatable & Negateable & Raisable
+	where Term: FixedWidthInteger
 	
 	// MARK: - Creating Instances
 	
@@ -41,7 +43,7 @@ extension Rational {
 	/// - parameter precision: The precision.
 	private init(
 		approximately value: Double,
-		precision: Double = 1e-6
+		precision: Double
 	) {
 		var currentValue: Double = value
 		
@@ -53,7 +55,7 @@ extension Rational {
 			return currentValue - .init(integral)
 		}
 		
-		var (h, k, numerator, denominator) = (1, 0, integral, 1)
+		var (n, d, numerator, denominator) = (1, 0, integral, 1)
 		
 		var epsilon: Double {
 			return precision * .init(denominator * denominator)
@@ -62,10 +64,10 @@ extension Rational {
 		while fractional > epsilon {
 			currentValue = 1 / (currentValue - .init(integral))
 			
-			let newNumerator: Int = h + integral * numerator
-			let newDenominator: Int = k + integral * denominator
+			let newNumerator: Int = n + integral * numerator
+			let newDenominator: Int = d + integral * denominator
 			
-			(h, k, numerator, denominator) = (numerator, denominator, newNumerator, newDenominator)
+			(n, d, numerator, denominator) = (numerator, denominator, newNumerator, newDenominator)
 		}
 		
 		self.init(.init(numerator), on: .init(denominator))
@@ -81,9 +83,9 @@ extension Rational {
 	) where Self: RepresentableByNaN & RepresentableByInfinity & Negateable {
 		if value.isNaN {
 			self = .nan
-		} else if value <= Double(Int.min) {
+		} else if value <= Double(Term.min) {
 			self = .negativeInfinity
-		} else if Double(Int.max) < value {
+		} else if Double(Term.max) < value {
 			self = .infinity
 		} else {
 			self.init(approximately: value, precision: precision)
@@ -153,7 +155,7 @@ extension Rational {
 }
 
 extension Rational
-where Self: Negateable {
+where Self: Negateable, Term: Negateable {
 	
 	// MARK: - Inspecting Values
 	
@@ -205,5 +207,33 @@ where Self: Negateable {
 	/// ```
 	public mutating func normalize() {
 		self = self.normalized()
+	}
+}
+
+extension Rational
+where Self: RepresentableByInfinity {
+	public var isFinite: Bool {
+		return self.denominator != 0
+	}
+	
+	public var isInfinite: Bool {
+		return self.numerator != 0
+			&& self.denominator == 0
+	}
+	
+	public static var infinity: Self {
+		return .init(1, on: 0)
+	}
+}
+
+extension Rational
+where Self: RepresentableByNaN {
+	public var isNaN: Bool {
+		return self.numerator == 0
+			&& self.denominator == 0
+	}
+	
+	public static var nan: Self {
+		return .init(0, on: 0)
 	}
 }

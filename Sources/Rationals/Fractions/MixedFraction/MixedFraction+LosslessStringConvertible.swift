@@ -7,11 +7,11 @@
 
 extension MixedFraction: LosslessStringConvertible {
 	public init?(_ description: String) {
-		if description == "-nan" || description == "nan" {
+		if description == "-nan" || description == "+nan" || description == "nan" {
 			self = .nan
 		} else if description == "-inf" {
 			self = .negativeInfinity
-		} else if description == "inf" {
+		} else if description == "+inf" || description == "inf" {
 			self = .infinity
 		} else if let value = Int(description) {
 			self.init(integerLiteral: value)
@@ -29,13 +29,13 @@ extension MixedFraction: LosslessStringConvertible {
 			substrings.replaceSubrange(1..., with: substrings[1].split(separator: "/", maxSplits: 2, omittingEmptySubsequences: false))
 			
 			guard substrings.count == 3,
-				  let newIntegral: Int = .init(substrings[0]),
-				  let newNumerator: Int = .init(substrings[1]),
-				  let newDenominator: Int = .init(substrings[2]) else {
+				  let integral: Term = .init(substrings[0]),
+				  let numerator: Term = .init(substrings[1]),
+				  let denominator: Term = .init(substrings[2]) else {
 				return nil
 			}
 			
-			self.init(.init(newIntegral), .init(newNumerator), on: .init(newDenominator))
+			self.init(integral, numerator, on: denominator)
 		}
 	}
 }

@@ -117,7 +117,7 @@ extension RationalTests {
 
 extension RationalTests {
 	func isNormalizedReturnsFalse()
-	where TestSubject: Negateable {
+	where TestSubject: Negateable, TestSubject.Term: Negateable {
 		// Given
 		let value: TestSubject = .init(1, on: -1)
 		
@@ -126,7 +126,7 @@ extension RationalTests {
 	}
 	
 	func isNormalizedReturnsTrue()
-	where TestSubject: Negateable {
+	where TestSubject: Negateable, TestSubject.Term: Negateable {
 		// Given
 		let value: TestSubject = .init(-1, on: 1)
 		
@@ -135,7 +135,7 @@ extension RationalTests {
 	}
 	
 	func nomalizedSucceeds()
-	where TestSubject: Negateable {
+	where TestSubject: Negateable, TestSubject.Term: Negateable {
 		// Given
 		let value: TestSubject = .init(1, on: -1).normalized()
 		
@@ -144,7 +144,7 @@ extension RationalTests {
 	}
 	
 	func nomalizeSucceeds()
-	where TestSubject: Negateable {
+	where TestSubject: Negateable, TestSubject.Term: Negateable {
 		// Given
 		var value: TestSubject = .init(1, on: -1)
 		
