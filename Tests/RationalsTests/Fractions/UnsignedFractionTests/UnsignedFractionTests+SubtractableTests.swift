@@ -1,4 +1,4 @@
-// FractionTests+SubtractableTests.swift
+// UnsignedFractionTests+SubtractableTests.swift
 // RationalsTests
 //
 // Copyright © 2021-2022 Alexandre H. Saad
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Rationals
 
-extension FractionTests {
+extension UnsignedFractionTests {
 	func test_subtractionReturnsLike() {
 		// Given
 		let minuend: TestSubject = .init(3, on: 4)

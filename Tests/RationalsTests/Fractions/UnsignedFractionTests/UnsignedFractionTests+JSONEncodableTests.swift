@@ -1,4 +1,4 @@
-// FractionTests+JSONEncodableTests.swift
+// UnsignedFractionTests+JSONEncodableTests.swift
 // RationalsTests
 //
 // Copyright © 2021-2022 Alexandre H. Saad
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Rationals
 
-extension FractionTests {
+extension UnsignedFractionTests {
 	func test_encodeToJSONSucceeds() throws {
 		// Given
 		let value: TestSubject = .init(1, on: 2)

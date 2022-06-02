@@ -1,4 +1,4 @@
-// FractionTests.swift
+// UnsignedFractionTests.swift
 // RationalsTests
 //
 // Copyright © 2021-2022 Alexandre H. Saad
@@ -8,6 +8,6 @@
 import XCTest
 @testable import Rationals
 
-final class FractionTests: XCTestCase {
-	typealias TestSubject =  Fraction<Int16>
+final class UnsignedFractionTests: XCTestCase {
+	typealias TestSubject = Fraction<UInt16>
 }

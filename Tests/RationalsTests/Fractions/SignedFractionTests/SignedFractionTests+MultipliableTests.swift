@@ -1,4 +1,4 @@
-// FractionTests+MultipliableTests.swift
+// SignedFractionTests+MultipliableTests.swift
 // RationalsTests
 //
 // Copyright © 2021-2022 Alexandre H. Saad
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Rationals
 
-extension FractionTests {
+extension SignedFractionTests {
 	func test_isMultipleOfReturnsFalse() {
 		// Given
 		let multiplicand: TestSubject = 3

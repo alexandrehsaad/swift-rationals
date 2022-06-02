@@ -1,4 +1,4 @@
-// FractionTests+SimplifiableTests.swift
+// UnsignedFractionTests+SimplifiableTests.swift
 // RationalsTests
 //
 // Copyright © 2021-2022 Alexandre H. Saad
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Rationals
 
-extension FractionTests: SimplifiableTests {
+extension UnsignedFractionTests: SimplifiableTests {
 	func test_isSimplifiableReturnsFalse() {
 		// Given
 		let value: TestSubject = .init(1, on: 2)

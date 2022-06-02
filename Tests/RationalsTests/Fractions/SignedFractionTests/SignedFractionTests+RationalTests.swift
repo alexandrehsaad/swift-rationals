@@ -1,4 +1,4 @@
-// MixedFractionTests+RationalTests.swift
+// SignedFractionTests+RationalTests.swift
 // RationalsTests
 //
 // Copyright © 2021-2022 Alexandre H. Saad
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Rationals
 
-extension MixedFractionTests: RationalTests {
+extension SignedFractionTests: RationalTests {
 	func test_initializedApproximatlySucceeds() {
 		// Given
 		let fractions: Array<(lhs: Double, rhs: TestSubject)> = [
@@ -40,7 +40,7 @@ extension MixedFractionTests: RationalTests {
 	
 	func test_quotientSucceeds() {
 		// Given
-		let value: TestSubject = .init(1, 1, on: 2)
+		let value: TestSubject = .init(3, on: 2)
 		
 		// When
 		let quotient: Double = value.quotient

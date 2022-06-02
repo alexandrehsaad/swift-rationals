@@ -1,4 +1,4 @@
-// FractionTests+LosslessStringConvertibleTests.swift
+// UnsignedFractionTests+LosslessStringConvertibleTests.swift
 // RationalsTests
 //
 // Copyright © 2021-2022 Alexandre H. Saad
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Rationals
 
-extension FractionTests {
+extension UnsignedFractionTests {
 	func test_initializedWithStringFails() {
 		// Given
 		let strings: Set<String> = ["1 / 2", "1÷2", "1.0/2.0"]
@@ -21,7 +21,7 @@ extension FractionTests {
 	
 	func test_initializedWithStringSucceeds() {
 		// Given
-		let strings: Set<String> = ["-1", "-0.5", "-1/2", "1/-2", "0.5", "1"]
+		let strings: Set<String> = ["1", "1/2"]
 		
 		// Then
 		for string in strings {
