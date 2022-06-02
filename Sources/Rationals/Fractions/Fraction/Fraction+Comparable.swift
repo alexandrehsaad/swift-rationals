@@ -21,7 +21,7 @@ extension Fraction: Comparable {
         }
         
 		if lhs.isLike(rhs) {
-			return lhs.numerator < rhs.denominator
+			return lhs.numerator < rhs.numerator
 		} else {
 			return lhs.quotient < rhs.quotient
 		}
