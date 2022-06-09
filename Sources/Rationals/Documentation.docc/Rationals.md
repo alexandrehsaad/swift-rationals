@@ -1,6 +1,6 @@
 # ``Rationals``
 
-A package containing extensions for the Swift programming language.
+A package containing extensions for the Swift programming language, for the Swift programming language.
 
 ## Overview
 
