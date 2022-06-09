@@ -2,7 +2,7 @@
 
 # swift-rationals
 
-A package containing rational types.
+A package containing rational types, for the Swift programming language.
 
 ## Overview
 
